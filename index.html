@@ -152,6 +152,164 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-DP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/24/DP/">DP</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/24/DP/" class="archive-article-date">
+  	<time datetime="2021-01-24T06:17:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="动态规划DP"><a href="#动态规划DP" class="headerlink" title="动态规划DP"></a>动态规划DP</h2><h5 id="1-爬楼梯问题"><a href="#1-爬楼梯问题" class="headerlink" title="1.爬楼梯问题"></a>1.爬楼梯问题</h5><p>求爬上n阶台阶一共有多少种方法,每次可以上一节台阶或两阶台阶</p>
+<h6 id="递归"><a href="#递归" class="headerlink" title="递归:"></a>递归:</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">0</span>)&#123;<span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">1</span>)&#123;<span class="keyword">return</span> <span class="number">1</span>;&#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> climbStairs(n-<span class="number">1</span>)+climbStair(n-<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="DP"><a href="#DP" class="headerlink" title="DP:"></a>DP:</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    楼梯的高度为0时,返回0</span></span><br><span class="line"><span class="comment">    楼梯的高度为1时,只有一种走法,返回1</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">0</span>)&#123;<span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">1</span>)&#123;<span class="keyword">return</span> <span class="number">1</span>;&#125;</span><br><span class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>];</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    dp[<span class="number">2</span>] = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">3</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        dp[i] = dp[i-<span class="number">1</span>]+dp[i-<span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="2-费波纳希数列优化"><a href="#2-费波纳希数列优化" class="headerlink" title="2.费波纳希数列优化"></a>2.费波纳希数列优化</h5><p>递归:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">0</span>)&#123;<span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">1</span> || n == <span class="number">2</span>)&#123;retrun <span class="number">1</span>;&#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> fib(n-<span class="number">1</span>)+fib(n-<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>DP:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">0</span>)&#123;<span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">1</span> || n == <span class="number">2</span>)&#123;<span class="keyword">return</span> <span class="number">1</span>;&#125;</span><br><span class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>];</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    dp[<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">3</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        dp[i] = dp[i-<span class="number">1</span>]+dp[i-<span class="number">2</span>]; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="3-礼物的最大价值"><a href="#3-礼物的最大价值" class="headerlink" title="3. 礼物的最大价值"></a>3. 礼物的最大价值</h5><h5 id="4-零钱兑换"><a href="#4-零钱兑换" class="headerlink" title="4.零钱兑换"></a>4.零钱兑换</h5><p>给定不同面值的硬币coins和一个总金额.编写一个函数来计算凑成总金额所需的<strong>最少</strong>的硬币个数.如果没有任何一种硬币组合能组成总金额,返回-1;</p>
+<p><code>示例1:</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入:coinsp[1,2,5],s&#x3D;11</span><br><span class="line">输出:3</span><br><span class="line">解释:11 &#x3D; 5 + 5 + 1</span><br></pre></td></tr></table></figure>
+<p><code>示例2</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入 : coins[2,5],s &#x3D; 3</span><br><span class="line">输出 : -1</span><br></pre></td></tr></table></figure>
+<p><code>示例3</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入 : coins[1,5,11,20],s&#x3D;15</span><br><span class="line">输出 : 3</span><br><span class="line">解释 : 15 &#x3D; 5 + 5 + 5</span><br></pre></td></tr></table></figure>
+<p><code>思路分析:</code></p>
+<p><em>步骤一 : 定义原问题和子问题:</em></p>
+<p>​    原问题 : 可以凑成总金额s所需的最少的硬币个数</p>
+<p>​    子问题 : 可以凑成目标金额x (x &lt;=  s)所需的最少的硬币个数</p>
+<p><em>步骤二 : 定义状态:</em></p>
+<p>​    记f(x) 为凑成目标金额所需金额x所需的最少的硬币个数,这里的目标金额x就表示子问题所对应的状态</p>
+<p><em>步骤三 : 寻找状态转移方程</em></p>
+<p>​    这个问题的状态转移方程不容易找,我们用下面的一个具体例子来说明:</p>
+<p>​    假设coins = [1,2,5,20],s=11,我们现在要求f(11). 大家思考下:状态11可以由哪些状态经过1步就转换过来?</p>
+<p>​            答案:可以由状态10,状态9和状态6经过一步转换过来.因为11可以由:</p>
+<p>​                            10 + 1 = 9 + 2 = 6 + 5 = 11 转换而来,而1,2,5都是coins里面的金额数,而20 大于11 不能作为组成11的一部分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">现在考虑一般的情形:已知coins &#x3D; [c1,c2...,cm],目标金额为x,那么:</span><br><span class="line">		f(x) &#x3D; min&#123; f(x - c1) , f(x - c2) ..., f(x - cm) &#125; + 1</span><br><span class="line">这里要注意:</span><br><span class="line">	(1)如果x - ci &lt; 0,我们令 f(x-ci) 取正无穷,在这样取最小值后就相当于排除了这种可能(因为这个硬币面值大于了目标金额,不会起到作用)</span><br><span class="line">   	(2)如果x - ci &#x3D; 0,那么 f(x-ci) &#x3D; 0,即f(0) &#x3D; 0(目标金额为0时不需要硬币)</span><br></pre></td></tr></table></figure>
+<p>题目中说:如果没有任何一种硬币组合能组成总金额s,就返回-1.因此最后我们还要判断下f(s)是否为正无穷.</p>
+<p><code>一个具体的例子:</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">x</th>
+<th align="center">最少硬币数量f(x)</th>
+<th align="center">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">f(1) =min{ f(1-1) , f(1-2) , f(1-5) } + 1 = min{0 , +inf , +inf} + 1</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">f(2) = min{ f(2-1) , f(2-2) , f(2-5) } + 1 = min{1 , 0 , +inf} + 1</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">f(3) = min{ f(3-1) , f(3-2) , f(3-5) } + 1 = min{1 , 1 , +inf} + 1</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">f(4) = min{ f(4-1) , f(4-2) , f(4-5) } + 1 = min{2 , 1 , +inf} + 1</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">f(5) = min{ f(5-1) , f(5-2) , f(5-5) } + 1 = min{2 , 2 , 0} + 1</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">f(6) = min{ f(6-1) , f(6-2) , f(6-5) } + 1 = min{1 , 2 , 1} + 1</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">f(7) = min{ f(7-1) , f(7-2) , f(7-5) } + 1 = min{2 , 1 , 1} + 1</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">f(8) = min{ f(8-1) , f(8-2) , f(8-5) } + 1 = min{2 , 2 , 2} + 1</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">f(9) = min{ f(9-1) , f(9-2) , f(9-5) } + 1 = min{3 , 2 , 2} + 1</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">f(10) = min{ f(10-1) , f(10-2) , f(10-5) } + 1 = min{3 , 3 , 1} + 1</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">f(11) = min{ f(11-1) , f(11-2) , f(11-5) } + 1 = min{2 , 3 , 2} + 1</td>
+<td align="center">3</td>
+</tr>
+</tbody></table>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/24/DP/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-my-first-blog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
